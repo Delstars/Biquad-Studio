@@ -1,26 +1,64 @@
-# Biquad-Studio
-A hardware-agnostic, low-latency gaming audio engine featuring dynamic channel routing, auto-calibration, and custom parametric EQ.
+# Biquad Studio 🎧
 
-## 🔥 Key Features
+**Biquad Studio** is an open-source, hardware-agnostic, ultra-low-latency desktop audio suite built for PC gamers, streamers, and creators.
 
-* **Dynamic Audio Routing:** Registers distinct virtual endpoints (`Game`, `Chat`, `Media`, `Mic`) natively within Windows.
-* **Hardware-Independent Game/Chat Balance:** Blend your communication and game tracks seamlessly using an in-app slider, tray controls, or system-wide global hotkeys.
-* **Dual-Stage DSP Engine:**
-  * **Stage 1 (Acoustic Calibration):** Automatically parses open-source acoustic databases to generate an inverse biquad filter curve, mathematically flattening your specific headset's hardware flaws.
-  * **Stage 2 (Gaming Equalizer):** A fully customizable parametric EQ layer optimized for situational audio tuning (e.g., footstep prioritization, dialogue clarity).
-* **Dolby Atmos Compatibility:** Feeds multi-channel audio directly into Microsoft's native Spatial Sound API, leveraging your existing system-wide Dolby Atmos for Headphones license cleanly without performance penalties.
+It provides a lightweight alternative to heavy proprietary audio ecosystems (like SteelSeries Sonar or Razer Synapse), offering professional-grade DSP processing, virtual multi-channel routing, and acoustic hardware auto-calibration at near-zero system cost.
 
----
+![Biquad Studio UI](https://raw.githubusercontent.com/Delstars/Biquad-Studio/main/biquad_studio_ui.jpg) *(UI Preview)*
 
-## 🛠️ Technical Stack (Proposed)
+## ✨ Features
 
-* **UI Dashboard:** Tauri (Rust + React / TypeScript) for a memory-efficient, lightweight footprint.
-* **Audio Core & Mixing Loop:** C++ or Rust (utilizing the JUCE framework or low-level WASAPI bindings).
-* **Driver Architecture:** Custom Windows Audio Processing Object (APO) or kernel-mode virtual routing layer.
-* **Global Input Hooks:** Low-level OS input interception (`rdev` / `iohook`) for game-focused shortcut triggers.
+- **Hardware Agnostic**: Works with any headset (USB, 3.5mm analog, or wireless).
+- **Virtual Audio Routing**: Assign Windows apps to dedicated `Game`, `Chat`, or `Media` channels to balance audio streams on the fly.
+- **Parametric Gaming EQ**: A real-time 10-band interactive EQ graph with Robert Bristow-Johnson (RBJ) biquad filters.
+- **AutoEQ Headphone Calibration**: Instantly correct the frequency response of over 8,800 supported headphone models to a neutral reference target.
+- **Game/Chat CrossFader**: Balance your voice chat vs game volume with a single slider.
+- **Spatial Audio Passthrough**: Hooks into Windows Sonic / Dolby Atmos for 7.1.4 object-based surround sound.
+- **Global Hotkeys**: Control master volume (`Ctrl+Alt+Up/Down`) and mute (`Ctrl+Alt+M`) even while in exclusive full-screen games.
+- **Ultra-Lightweight**: Built on Tauri (Rust + React) consuming only ~40-50MB of RAM—no background bloatware or mandatory accounts.
 
-* LEGAL DISCLAIMER
-----------------
-Biquad Studio is an independent, community-driven open-source project created from scratch. It is not affiliated, associated, authorized, endorsed by, or in any way officially connected with SteelSeries, Razer, Corsair, Logitech, or any of their subsidiaries or affiliates. 
+## 🚀 Installation
 
-All product and company names, logos, or registered trademarks (including "SteelSeries GG", "Sonar", "Razer Synapse", and "Dolby Atmos") are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them, and they are used strictly under nominative fair use guidelines for architectural comparison purposes.
+1. Navigate to the **[Releases](../../releases)** tab on GitHub.
+2. Download the latest `Biquad Studio_x.x.x_x64-setup.exe` installer.
+3. Run the installer and follow the prompt.
+4. Launch **Biquad Studio** from your Start menu!
+
+## 🛠️ Usage Instructions
+
+### 1. Set Your Output Device
+When you first open Biquad Studio, select your physical headset from the **Output Device** dropdown in the top right.
+
+### 2. Auto-Calibrate Your Headset
+Under the **Calibration** section, search for your headphone model (e.g., *Sennheiser HD 600*). Click **Apply** to instantly load its correction profile and flatten your headset's frequency response.
+
+### 3. Route Your Audio
+Under the **Routing Matrix**, you will see three faders: **Game**, **Chat**, and **Media**. 
+*(Note: Full per-app virtual routing via Process Loopback is enabled under the hood. App assignment UI is coming in the next update!)*
+
+Use the horizontal slider at the bottom to fade between your Game audio and Chat audio.
+
+### 4. Create a Custom EQ
+Click and drag the nodes on the **Parametric EQ** graph to boost footsteps, lower muddy bass, or fine-tune your gaming audio to your exact preference.
+
+## 🏗️ Development & Building from Source
+
+**Prerequisites:**
+- Node.js (v18+)
+- `pnpm` (`npm install -g pnpm`)
+- Rust toolchain (`rustup`)
+- *Windows Only:* MinGW/GNU or MSVC build tools.
+
+```bash
+# Install dependencies
+pnpm install
+
+# Run in development mode
+pnpm tauri dev
+
+# Build the release installer (.exe)
+pnpm tauri build
+```
+
+## 📜 License
+MIT License. Copyright (c) 2026 Delstars.
