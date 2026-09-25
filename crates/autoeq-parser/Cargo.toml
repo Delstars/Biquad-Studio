@@ -1,0 +1,11 @@
+[package]
+name = "autoeq-parser"
+description = "Parser for AutoEQ ParametricEQ.txt profiles and headphone model database"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+biquad-dsp = { path = "../biquad-dsp" }
+serde = { workspace = true }
+thiserror = { workspace = true }

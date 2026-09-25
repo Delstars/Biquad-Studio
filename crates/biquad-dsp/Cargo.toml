@@ -1,0 +1,11 @@
+[package]
+name = "biquad-dsp"
+description = "Pure biquad IIR filter DSP library for real-time audio processing"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+
+[dev-dependencies]
+approx = "0.5"

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-list-render-devices"
+description = "Enables the list_render_devices command without any pre-configured scope."
+commands.allow = ["list_render_devices"]
+
+[[permission]]
+identifier = "deny-list-render-devices"
+description = "Denies the list_render_devices command without any pre-configured scope."
+commands.deny = ["list_render_devices"]

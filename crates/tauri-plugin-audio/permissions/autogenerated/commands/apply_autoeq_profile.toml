@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-apply-autoeq-profile"
+description = "Enables the apply_autoeq_profile command without any pre-configured scope."
+commands.allow = ["apply_autoeq_profile"]
+
+[[permission]]
+identifier = "deny-apply-autoeq-profile"
+description = "Denies the apply_autoeq_profile command without any pre-configured scope."
+commands.deny = ["apply_autoeq_profile"]

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-set-channel-volume"
+description = "Enables the set_channel_volume command without any pre-configured scope."
+commands.allow = ["set_channel_volume"]
+
+[[permission]]
+identifier = "deny-set-channel-volume"
+description = "Denies the set_channel_volume command without any pre-configured scope."
+commands.deny = ["set_channel_volume"]

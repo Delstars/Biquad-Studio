@@ -1,0 +1,21 @@
+[package]
+name = "tauri-plugin-audio"
+description = "Tauri v2 plugin exposing Biquad Studio audio engine to the webview frontend"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+links = "tauri-plugin-audio"
+
+[dependencies]
+audio-engine = { path = "../audio-engine" }
+autoeq-parser = { path = "../autoeq-parser" }
+biquad-dsp = { path = "../biquad-dsp" }
+tauri = { version = "2", features = [] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+thiserror = { workspace = true }
+tokio = { version = "1", features = ["sync", "time"] }
+
+[build-dependencies]
+tauri-plugin = { version = "2", features = ["build"] }

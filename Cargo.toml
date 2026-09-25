@@ -1,0 +1,23 @@
+[workspace]
+resolver = "2"
+members = [
+    "src-tauri",
+    "crates/biquad-dsp",
+    "crates/autoeq-parser",
+    "crates/audio-engine",
+    "crates/tauri-plugin-audio",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Delstars"]
+repository = "https://github.com/Delstars/Biquad-Studio"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }

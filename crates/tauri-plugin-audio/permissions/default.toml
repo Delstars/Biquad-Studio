@@ -1,0 +1,82 @@
+[default]
+description = "Default permissions for the audio plugin"
+permissions = [
+    "allow-list-render-devices",
+    "allow-list-capture-devices",
+    "allow-get-engine-status",
+    "allow-start-engine",
+    "allow-stop-engine",
+    "allow-set-channel-volume",
+    "allow-set-channel-mute",
+    "allow-set-crossfade",
+    "allow-set-master-volume",
+    "allow-set-master-mute",
+    "allow-search-headphones",
+    "allow-apply-autoeq-profile",
+    "allow-update-eq-filter",
+]
+
+[[permission]]
+identifier = "allow-list-render-devices"
+description = "Allows listing audio render devices"
+commands.allow = ["list_render_devices"]
+
+[[permission]]
+identifier = "allow-list-capture-devices"
+description = "Allows listing audio capture devices"
+commands.allow = ["list_capture_devices"]
+
+[[permission]]
+identifier = "allow-get-engine-status"
+description = "Allows getting the engine status"
+commands.allow = ["get_engine_status"]
+
+[[permission]]
+identifier = "allow-start-engine"
+description = "Allows starting the audio engine"
+commands.allow = ["start_engine"]
+
+[[permission]]
+identifier = "allow-stop-engine"
+description = "Allows stopping the audio engine"
+commands.allow = ["stop_engine"]
+
+[[permission]]
+identifier = "allow-set-channel-volume"
+description = "Allows setting per-channel volume"
+commands.allow = ["set_channel_volume"]
+
+[[permission]]
+identifier = "allow-set-channel-mute"
+description = "Allows muting/unmuting channels"
+commands.allow = ["set_channel_mute"]
+
+[[permission]]
+identifier = "allow-set-crossfade"
+description = "Allows adjusting the Game/Chat crossfade"
+commands.allow = ["set_crossfade"]
+
+[[permission]]
+identifier = "allow-set-master-volume"
+description = "Allows setting master volume"
+commands.allow = ["set_master_volume"]
+
+[[permission]]
+identifier = "allow-set-master-mute"
+description = "Allows toggling master mute"
+commands.allow = ["set_master_mute"]
+
+[[permission]]
+identifier = "allow-search-headphones"
+description = "Allows searching the AutoEQ headphone database"
+commands.allow = ["search_headphones"]
+
+[[permission]]
+identifier = "allow-apply-autoeq-profile"
+description = "Allows applying an AutoEQ calibration profile"
+commands.allow = ["apply_autoeq_profile"]
+
+[[permission]]
+identifier = "allow-update-eq-filter"
+description = "Allows updating a parametric EQ filter band"
+commands.allow = ["update_eq_filter"]

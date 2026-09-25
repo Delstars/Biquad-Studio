@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Import Inter font */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+  html, body, #root {
+    @apply h-full w-full m-0 p-0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-bq-bg-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-bq-border-active rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-bq-text-muted;
+  }
+}
+
+@layer components {
+  /* Glass-morphism panel used throughout the UI */
+  .bq-panel {
+    @apply bg-bq-bg-secondary/80 backdrop-blur-sm border border-bq-border rounded-lg;
+  }
+
+  /* Accent button style */
+  .bq-button {
+    @apply px-4 py-2 bg-bq-accent hover:bg-bq-accent-hover text-white font-medium 
+           rounded-md transition-colors duration-150 ease-in-out
+           focus:outline-none focus:ring-2 focus:ring-bq-accent/50;
+  }
+
+  /* Ghost/secondary button */
+  .bq-button-ghost {
+    @apply px-4 py-2 bg-transparent hover:bg-bq-bg-tertiary text-bq-text-secondary
+           border border-bq-border hover:border-bq-border-active
+           rounded-md transition-colors duration-150 ease-in-out
+           focus:outline-none focus:ring-2 focus:ring-bq-accent/30;
+  }
+}

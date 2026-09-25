@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-update-eq-filter"
+description = "Enables the update_eq_filter command without any pre-configured scope."
+commands.allow = ["update_eq_filter"]
+
+[[permission]]
+identifier = "deny-update-eq-filter"
+description = "Denies the update_eq_filter command without any pre-configured scope."
+commands.deny = ["update_eq_filter"]
