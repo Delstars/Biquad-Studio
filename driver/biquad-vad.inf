@@ -1,0 +1,55 @@
+; biquad-vad.inf
+; Installation file for Biquad Studio Virtual Audio Device
+; Based on MS sysvad sample
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=MEDIA
+ClassGuid={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%ProviderName%
+DriverVer=09/25/2026, 1.0.0.0
+CatalogFile=biquad_vad.cat
+
+[Manufacturer]
+%ProviderName%=BiquadStudio,NTx86,NTamd64
+
+[BiquadStudio.NTx86]
+%DeviceDesc%=BiquadVAD, ROOT\BiquadVAD
+
+[BiquadStudio.NTamd64]
+%DeviceDesc%=BiquadVAD, ROOT\BiquadVAD
+
+[BiquadVAD]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=BiquadVAD.CopyList
+AddReg=BiquadVAD.AddReg
+
+[BiquadVAD.CopyList]
+biquad_vad.sys
+
+[BiquadVAD.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,biquad_vad.sys
+HKR,,NTMPDriver,,"biquad_vad.sys,sbemul.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%DeviceDesc%
+HKR,Drivers\midi\wdmaud.drv,Description,,%DeviceDesc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DeviceDesc%
+
+[BiquadVAD.Services]
+AddService = biquad_vad, 0x00000002, BiquadVAD_Service_Inst
+
+[BiquadVAD_Service_Inst]
+DisplayName    = %DeviceDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\biquad_vad.sys
+
+[Strings]
+ProviderName="Biquad Studio"
+DeviceDesc="Biquad Studio Virtual Audio Endpoint"
