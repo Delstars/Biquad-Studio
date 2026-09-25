@@ -45,6 +45,12 @@ impl DeepNoiseProcessor {
                 got: buffer.len(),
             });
         }
+        
+        // Mock processing for now
+        for sample in buffer.iter_mut() {
+            *sample *= 0.95; 
+        }
+
         Ok(())
     }
 

@@ -4,6 +4,7 @@
 //! parameter control, and AutoEQ profile management.
 
 mod commands;
+mod process;
 mod state;
 
 use tauri::{
@@ -15,6 +16,7 @@ use tauri::{
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
     Builder::new("audio")
         .invoke_handler(tauri::generate_handler![
+            process::list_running_apps,
             commands::list_render_devices,
             commands::list_capture_devices,
             commands::get_engine_status,

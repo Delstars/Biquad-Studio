@@ -7,6 +7,7 @@ import { StatusBar } from "./shared/components/StatusBar";
 import { Sidebar } from "./shared/components/Sidebar";
 import { CloudSync } from "./features/cloud-sync/components/CloudSync";
 import { AutoEqSelector } from "./features/headset-calibration/components/AutoEqSelector";
+import { AppRouter } from "./features/app-router/components/AppRouter";
 
 /** Audio device info returned from the Rust backend */
 export interface AudioDeviceInfo {
@@ -179,6 +180,12 @@ function App() {
           <section className="flex flex-col gap-3">
             <h2 className="text-sm font-medium text-bq-text-secondary uppercase tracking-wider">Calibration</h2>
             <AutoEqSelector />
+          </section>
+
+          {/* App Routing */}
+          <section className="flex flex-col gap-3">
+            <h2 className="text-sm font-medium text-bq-text-secondary uppercase tracking-wider">Process Routing</h2>
+            <AppRouter />
           </section>
 
           {/* Channel Mixer Section */}
