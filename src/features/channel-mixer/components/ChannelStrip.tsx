@@ -1,12 +1,15 @@
+import { ReactNode } from "react";
+
 interface ChannelStripProps {
   label: string;
   icon: string;
   colorClass: string;
-  volume: number;      // 0-100
+  volume: number;
   muted: boolean;
   onVolumeChange: (value: number) => void;
   onMuteToggle: () => void;
   engineRunning: boolean;
+  children?: ReactNode;
 }
 
 export function ChannelStrip({
@@ -17,27 +20,40 @@ export function ChannelStrip({
   muted,
   onVolumeChange,
   onMuteToggle,
+  children
 }: ChannelStripProps) {
-  /** Convert a 0-100 volume to a dB display string */
-  function volumeToDb(vol: number): string {
-    if (vol === 0) return "-∞";
-    // Simple mapping: 100 = 0dB, 0 = -inf
-    const db = 20 * Math.log10(vol / 100);
-    return `${db.toFixed(1)} dB`;
-  }
-
   return (
-    <div className="bq-panel flex flex-col items-center gap-3 px-4 py-4 flex-1 min-w-[100px] max-w-[160px]">
-      {/* Channel Label */}
-      <div className="flex flex-col items-center gap-1">
-        <span className="text-xl">{icon}</span>
-        <span className={`text-xs font-semibold uppercase tracking-wider ${colorClass}`}>
-          {label}
+    <div className="bq-panel flex flex-col items-center gap-3 px-4 py-4 flex-1 min-w-[120px] max-w-[200px]">
+      <div className="flex items-center gap-2 mb-2 w-full justify-center">
+        <span className={`text-sm font-bold tracking-wide uppercase ${colorClass}`}>
+          {icon} {label}
         </span>
+        <button className="text-bq-text-muted hover:text-white ml-auto">⚙</button>
       </div>
 
-      {/* Volume Slider (vertical) */}
-      <div className="flex-1 flex flex-col items-center justify-center min-h-[200px] w-full">
+      <div className="w-full flex flex-col gap-1 text-[10px] uppercase font-bold text-bq-text-muted mt-2">
+        <div className="flex items-center justify-between">
+          <span>PRESETS</span>
+        </div>
+        <button className="bg-bq-bg-tertiary px-2 py-1.5 rounded w-full text-left flex items-center gap-2 text-white truncate hover:bg-bq-border-active transition-colors">
+          <span className={`w-3 h-3 rounded-sm ${colorClass.replace('text-', 'bg-')}`}></span>
+          {label === 'GAME' ? 'RPG-Cinema' : label === 'CHAT' ? 'Chat' : 'Flat'}
+        </button>
+      </div>
+
+      <div className="w-full flex flex-col gap-1 text-[10px] uppercase font-bold text-bq-text-muted mt-2">
+        <div className="flex items-center justify-between">
+          <span>DEVICES</span>
+        </div>
+        <button className="bg-bq-bg-tertiary px-2 py-1.5 rounded w-full text-left flex justify-between items-center text-white truncate hover:bg-bq-border-active transition-colors">
+          <span className="truncate flex items-center gap-1">
+            <span className="text-bq-meter-green">🔗</span> Headphones
+          </span>
+          <span className="text-bq-text-muted">100%</span>
+        </button>
+      </div>
+
+      <div className="flex-1 flex flex-col items-center justify-center min-h-[250px] w-full mt-6">
         <input
           type="range"
           min={0}
@@ -47,38 +63,31 @@ export function ChannelStrip({
           className="h-full w-2 appearance-none bg-bq-bg-tertiary rounded-full cursor-pointer
                      [writing-mode:vertical-lr] [direction:rtl]
                      [&::-webkit-slider-thumb]:appearance-none
-                     [&::-webkit-slider-thumb]:w-4
-                     [&::-webkit-slider-thumb]:h-4
-                     [&::-webkit-slider-thumb]:rounded-full
-                     [&::-webkit-slider-thumb]:bg-bq-accent
+                     [&::-webkit-slider-thumb]:w-5
+                     [&::-webkit-slider-thumb]:h-3
+                     [&::-webkit-slider-thumb]:rounded-sm
+                     [&::-webkit-slider-thumb]:bg-white
                      [&::-webkit-slider-thumb]:shadow-md
-                     [&::-webkit-slider-thumb]:hover:bg-bq-accent-hover
+                     [&::-webkit-slider-thumb]:hover:bg-gray-200
                      [&::-webkit-slider-thumb]:transition-colors"
           style={{ opacity: muted ? 0.4 : 1 }}
         />
       </div>
 
-      {/* Volume Display */}
-      <div className="text-center">
-        <span className="text-xs font-mono text-bq-text-secondary block">
-          {volumeToDb(muted ? 0 : volume)}
-        </span>
-        <span className="text-[10px] font-mono text-bq-text-muted">
-          {muted ? "MUTED" : `${volume}%`}
-        </span>
+      <div className="text-center mt-2 w-full">
+        <button
+          onClick={onMuteToggle}
+          className={`w-full py-2 rounded-md text-xs transition-all duration-150 flex justify-center items-center ${
+            muted
+              ? "bg-bq-meter-red/10 text-bq-meter-red hover:bg-bq-meter-red/20"
+              : "text-bq-text-secondary hover:text-white hover:bg-bq-bg-tertiary"
+          }`}
+        >
+          {muted ? "🔇" : "🔊"}
+        </button>
       </div>
 
-      {/* Mute Button */}
-      <button
-        onClick={onMuteToggle}
-        className={`w-full py-1.5 rounded text-xs font-medium transition-all duration-150 ${
-          muted
-            ? "bg-bq-meter-red/20 text-bq-meter-red border border-bq-meter-red/30"
-            : "bg-bq-bg-tertiary text-bq-text-muted border border-bq-border hover:border-bq-border-active"
-        }`}
-      >
-        {muted ? "🔇 Muted" : "🔊 Mute"}
-      </button>
+      {children && <div className="w-full">{children}</div>}
     </div>
   );
 }

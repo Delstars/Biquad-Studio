@@ -93,7 +93,7 @@ checksum = "628d228f918ac3b82fe590352cc719d30664a0c13ca3a60266fe02c7132d480a"
 
 [[package]]
 name = "audio-engine"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "atomic_float",
  "autoeq-parser",
@@ -126,7 +126,7 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
 name = "autoeq-parser"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "biquad-dsp",
  "serde",
@@ -153,14 +153,14 @@ checksum = "ac07cdecf99051d9a5238b80f35af32cdeba5b336e55d957b318b50137e18da5"
 
 [[package]]
 name = "biquad-dsp"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "approx",
 ]
 
 [[package]]
 name = "biquad-studio"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "serde",
  "serde_json",
@@ -3421,7 +3421,7 @@ dependencies = [
 
 [[package]]
 name = "tauri-plugin-audio"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "audio-engine",
  "autoeq-parser",

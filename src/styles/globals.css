@@ -3,12 +3,39 @@
 @tailwind utilities;
 
 @layer base {
-  /* Import Inter font */
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
+  :root {
+    --color-bg-primary: #f0f2f5;
+    --color-bg-secondary: #ffffff;
+    --color-bg-tertiary: #f8fafc;
+    --color-text-primary: #1e293b;
+    --color-text-secondary: #475569;
+    --color-text-muted: #94a3b8;
+    --color-border: #e2e8f0;
+    --color-border-active: #cbd5e1;
+    --color-accent: #6366f1;
+    --color-accent-hover: #4f46e5;
+    --color-accent-dim: #e0e7ff;
+  }
+
+  html.dark {
+    --color-bg-primary: #18191e;
+    --color-bg-secondary: #212228;
+    --color-bg-tertiary: #2a2c34;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #cbd5e1;
+    --color-text-muted: #64748b;
+    --color-border: #333640;
+    --color-border-active: #475569;
+    --color-accent: #6366f1;
+    --color-accent-hover: #818cf8;
+    --color-accent-dim: #312e81;
+  }
+
   html, body, #root {
-    @apply h-full w-full m-0 p-0;
+    @apply h-full w-full m-0 p-0 bg-bq-bg text-bq-text;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -33,9 +60,9 @@
 }
 
 @layer components {
-  /* Glass-morphism panel used throughout the UI */
+  /* Solid matte panel used throughout the UI */
   .bq-panel {
-    @apply bg-bq-bg-secondary/80 backdrop-blur-sm border border-bq-border rounded-lg;
+    @apply bg-bq-bg-secondary border border-bq-border rounded-lg shadow-sm;
   }
 
   /* Accent button style */

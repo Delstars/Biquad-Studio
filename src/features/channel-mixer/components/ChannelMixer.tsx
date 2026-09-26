@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { ChannelStrip } from "./ChannelStrip";
-import { CrossFader } from "./CrossFader";
 
 interface ChannelMixerProps {
   engineRunning: boolean;
@@ -27,7 +26,6 @@ export function ChannelMixer({ engineRunning }: ChannelMixerProps) {
     media: false,
     mic: false,
   });
-  const [crossfade, setCrossfade] = useState(50); // 0-100, 50 = center
 
   async function handleVolumeChange(channelId: string, value: number) {
     setVolumes((prev) => ({ ...prev, [channelId]: value }));
@@ -58,19 +56,6 @@ export function ChannelMixer({ engineRunning }: ChannelMixerProps) {
     }
   }
 
-  async function handleCrossfadeChange(value: number) {
-    setCrossfade(value);
-    if (engineRunning) {
-      try {
-        await invoke("plugin:audio|set_crossfade", {
-          position: value / 100,
-        });
-      } catch (err) {
-        console.error("Failed to set crossfade:", err);
-      }
-    }
-  }
-
   return (
     <div className="flex flex-col gap-6 h-full">
       {/* Channel Header */}
@@ -84,7 +69,23 @@ export function ChannelMixer({ engineRunning }: ChannelMixerProps) {
       </div>
 
       {/* Channel Strips */}
-      <div className="flex gap-4 flex-1 min-h-0">
+      <div className="flex gap-4 flex-1 min-h-0 items-stretch">
+        <ChannelStrip
+          label="MASTER"
+          icon="🎛️"
+          colorClass="text-bq-accent"
+          volume={volumes.game}
+          muted={mutes.game}
+          onVolumeChange={(v) => handleVolumeChange("game", v)}
+          onMuteToggle={() => handleMuteToggle("game")}
+          engineRunning={engineRunning}
+        >
+          <div className="h-32 mt-4 border-t border-bq-border pt-4">
+            <span className="text-xs text-bq-text-muted">Apps to be routed</span>
+            <div className="mt-2 bg-bq-bg-tertiary rounded border border-bq-border/50 h-full"></div>
+          </div>
+        </ChannelStrip>
+
         {CHANNELS.map((channel) => (
           <ChannelStrip
             key={channel.id}
@@ -96,15 +97,18 @@ export function ChannelMixer({ engineRunning }: ChannelMixerProps) {
             onVolumeChange={(v) => handleVolumeChange(channel.id, v)}
             onMuteToggle={() => handleMuteToggle(channel.id)}
             engineRunning={engineRunning}
-          />
+          >
+            <div className="h-32 mt-4 border-t border-bq-border pt-4 flex flex-col gap-2">
+              <span className="text-xs text-bq-text-muted">Apps</span>
+              <div className="flex-1 bg-bq-bg-tertiary rounded border border-bq-border/50 p-2 flex flex-col gap-1 overflow-auto">
+                {/* Mock apps */}
+                {channel.id === 'game' && <div className="bg-bq-meter-green/20 text-bq-meter-green text-xs font-mono px-2 py-1 rounded">SVCHOST</div>}
+                {channel.id === 'chat' && <div className="bg-blue-500/20 text-blue-400 text-xs font-mono px-2 py-1 rounded">DISCORD</div>}
+              </div>
+            </div>
+          </ChannelStrip>
         ))}
       </div>
-
-      {/* Game/Chat CrossFader */}
-      <CrossFader
-        value={crossfade}
-        onChange={handleCrossfadeChange}
-      />
     </div>
   );
 }
